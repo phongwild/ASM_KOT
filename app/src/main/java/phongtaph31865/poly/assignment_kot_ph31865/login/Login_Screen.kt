@@ -1,10 +1,5 @@
 package phongtaph31865.poly.assignment_kot_ph31865.login
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -23,7 +18,6 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -36,16 +30,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.graphics.toColorInt
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.navigation.NavController
 import phongtaph31865.poly.assignment_kot_ph31865.R
 import phongtaph31865.poly.assignment_kot_ph31865.Routes
 import phongtaph31865.poly.assignment_kot_ph31865.ui.theme.MerriweatherFontFamily
-import phongtaph31865.poly.assignment_kot_ph31865.ui.theme.NunitoSans
+
 //@Preview
 @Composable
-fun Register_Screen(navController: NavController) {
+fun Login_Screen(navController: NavController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -84,7 +76,17 @@ fun Register_Screen(navController: NavController) {
             modifier = Modifier.padding(top = 20.dp, start = 30.dp, bottom = 20.dp),
         ) {
             Text(
-                text = "WELCOME",
+                text = "Hello !",
+                modifier = Modifier,
+                color = Color("#909090".toColorInt()),
+                fontSize = 30.sp,
+                lineHeight = 45.sp,
+                fontFamily = MerriweatherFontFamily,
+                fontWeight = FontWeight(400)
+            )
+            Spacer(modifier = Modifier.height(10.dp))
+            Text(
+                text = "WELCOME BACK",
                 modifier = Modifier,
                 color = Color.Black,
                 fontSize = 24.sp,
@@ -96,39 +98,40 @@ fun Register_Screen(navController: NavController) {
         Column(
             modifier = Modifier
                 .width(345.dp)
-                .height(550.dp)
-                .padding(start = 20.dp, top = 20.dp)
-            ,
+                .height(437.dp)
+                .padding(start = 20.dp, top = 40.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            input(name = "Name")
-            Spacer(modifier = Modifier.height(10.dp))
             input(name = "Email")
             Spacer(modifier = Modifier.height(10.dp))
             input(name = "Password")
-            Spacer(modifier = Modifier.height(10.dp))
-            input(name = "Confirm Password")
-            Spacer(modifier = Modifier.height(40.dp))
-            button("#242424", "SIGN UP", onClick = {})
-            Spacer(modifier = Modifier.height(10.dp))
-            Row (
-                verticalAlignment = Alignment.CenterVertically
-            ){
-                Text(text = "Already have account?",
-                    color = Color("#808080".toColorInt()),
-                    fontWeight = FontWeight(700),
-                    fontSize = 14.sp,
-                    lineHeight = 19.sp)
-                Spacer(modifier = Modifier.width(5.dp))
-                TextButton(onClick = {
-                    navController.navigate(Routes.Login)
-                }) {
-                    Text(text = "SIGN IN",
-                        color = Color("#303030".toColorInt()),
-                        fontSize = 14.sp,
-                        fontWeight = FontWeight(700),
-                        lineHeight = 19.sp,)
-                }
+            Spacer(modifier = Modifier.height(20.dp))
+            Text(
+                text = "Forgot Password",
+                modifier = Modifier,
+                fontSize = 18.sp,
+                fontWeight = FontWeight(600),
+                lineHeight = 24.sp,
+                color = Color("#303030".toColorInt())
+            )
+            Spacer(modifier = Modifier.height(20.dp))
+            button("#242424", "Log in", onClick = { navController.navigate(Routes.BottomNav) })
+            Spacer(modifier = Modifier.height(15.dp))
+            Button(
+                onClick = {
+                    navController.navigate(Routes.Register)
+                },
+                modifier = Modifier
+                    .width(285.dp)
+                    .height(50.dp),
+                colors = ButtonDefaults.buttonColors(Color("#ffffff".toColorInt())),
+            ) {
+                Text(
+                    text = "SIGN UP",
+                    color = Color("#303030".toColorInt()),
+                    fontWeight = FontWeight(500),
+                    fontSize = 16.sp,
+                )
             }
         }
     }
@@ -136,7 +139,7 @@ fun Register_Screen(navController: NavController) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun edtext(name: String) {
+fun input(name: String) {
     OutlinedTextField(
         value = "",
         onValueChange = {},
@@ -159,4 +162,25 @@ fun edtext(name: String) {
             unfocusedBorderColor = Color.Transparent,
         )
     )
+}
+
+@Composable
+fun button(color: String, value: String, onClick: () -> Unit) {
+    Button(
+        onClick = {
+            onClick
+        },
+        modifier = Modifier
+            .width(285.dp)
+            .height(50.dp)
+            .padding(start = 15.dp, end = 15.dp),
+        colors = ButtonDefaults.buttonColors(Color(color.toColorInt())),
+        shape = CutCornerShape(7)
+    ) {
+        Text(
+            text = value,
+            fontWeight = FontWeight(500),
+            fontSize = 18.sp,
+        )
+    }
 }

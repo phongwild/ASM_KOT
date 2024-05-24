@@ -1,29 +1,29 @@
-package phongtaph31865.poly.assignment_kot_ph31865.screen
+package phongtaph31865.poly.assignment_kot_ph31865
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import phongtaph31865.poly.assignment_kot_ph31865.R
-import phongtaph31865.poly.assignment_kot_ph31865.login.MainActivity
+import phongtaph31865.poly.assignment_kot_ph31865.login.Login_Screen
 import phongtaph31865.poly.assignment_kot_ph31865.login.Register_Screen
+import phongtaph31865.poly.assignment_kot_ph31865.navigation.BottomNavbar
 
-class Container_navigation : ComponentActivity() {
+class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
         setContent {
             val navController = rememberNavController()
-            NavHost(navController = navController, startDestination = "login" ){
-                composable("login"){MainActivity()}
-                composable("register"){Register_Screen()}
+            NavHost(navController = navController, startDestination = Routes.BottomNav) {
+                composable(Routes.Login){ Login_Screen(navController)}
+                composable(Routes.Register){ Register_Screen(navController)}
+                composable(Routes.BottomNav) { BottomNavbar() }
             }
         }
     }
+
 
 }

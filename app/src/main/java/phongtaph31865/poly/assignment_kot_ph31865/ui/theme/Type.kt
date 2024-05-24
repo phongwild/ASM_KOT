@@ -46,3 +46,6 @@ val MerriweatherFontFamily = FontFamily(
 val NunitoSans = FontFamily(
     Font(R.font.nunitosans)
 )
+val GelasioFont = FontFamily(
+    Font(R.font.gelasio_regular)
+)
