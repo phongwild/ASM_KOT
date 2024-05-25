@@ -2,11 +2,17 @@ package phongtaph31865.poly.assignment_kot_ph31865.navigation
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Icon
@@ -15,6 +21,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
@@ -23,6 +30,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.graphics.toColorInt
 import phongtaph31865.poly.assignment_kot_ph31865.R
 import phongtaph31865.poly.assignment_kot_ph31865.ui.theme.GelasioFont
 import phongtaph31865.poly.assignment_kot_ph31865.ui.theme.backGround
@@ -38,7 +46,7 @@ fun Home_Screen(){
         verticalArrangement = Arrangement.Top
     ) {
         Row (
-            verticalAlignment = Alignment.CenterVertically
+            verticalAlignment = Alignment.CenterVertically,
         ){
             IconButton(onClick = { }, modifier = Modifier.weight(1f)) {
                 Icon(imageVector = ImageVector.vectorResource(id = R.drawable.ic_search) , contentDescription = "")
@@ -60,5 +68,33 @@ fun Home_Screen(){
                 Icon(imageVector = ImageVector.vectorResource(id = R.drawable.ic_cart) , contentDescription = "")
             }
         }
+        Row(
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            CateHome(title = "Popular", img = R.drawable.star)
+            CateHome(title = "Chair", img = R.drawable.chair)
+            CateHome(title = "Table", img = R.drawable.table)
+            CateHome(title = "Armchair", img = R.drawable.armchair)
+        }
+    }
+}
+@Composable
+fun CateHome(title: String, img: Int){
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier.padding(20.dp)
+    ) {
+        Column(
+            modifier = Modifier
+                .width(50.dp)
+                .height(50.dp)
+                .clip(CutCornerShape(12.dp))
+                .background(Color("#f5f5f5".toColorInt())),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Image(painter = painterResource(id = img), contentDescription = null, modifier = Modifier.width(24.dp).height(24.dp))
+        }
+        Text(text = title, fontSize = 14.sp, fontWeight = FontWeight(600), lineHeight = 19.sp, color = Color("#999999".toColorInt()))
     }
 }
