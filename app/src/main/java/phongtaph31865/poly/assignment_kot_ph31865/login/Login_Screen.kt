@@ -1,5 +1,7 @@
 package phongtaph31865.poly.assignment_kot_ph31865.login
 
+import android.content.Intent
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -24,20 +26,25 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.content.ContextCompat
 import androidx.core.graphics.toColorInt
 import androidx.navigation.NavController
 import phongtaph31865.poly.assignment_kot_ph31865.R
 import phongtaph31865.poly.assignment_kot_ph31865.Routes
+import phongtaph31865.poly.assignment_kot_ph31865.navigation.BottomNavbar
+//import phongtaph31865.poly.assignment_kot_ph31865.navigation.Container_Bottom_nav
 import phongtaph31865.poly.assignment_kot_ph31865.ui.theme.MerriweatherFontFamily
 
 //@Preview
 @Composable
 fun Login_Screen(navController: NavController) {
+    val context = LocalContext.current
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -115,7 +122,25 @@ fun Login_Screen(navController: NavController) {
                 color = Color("#303030".toColorInt())
             )
             Spacer(modifier = Modifier.height(20.dp))
-            button("#242424", "Log in", onClick = { navController.navigate(Routes.BottomNav) })
+            Button(
+                onClick = {
+                    navController.navigate(Routes.BottomNav){
+                        popUpTo(Routes.Desti)
+                    }
+                },
+                modifier = Modifier
+                    .width(285.dp)
+                    .height(50.dp)
+                    .padding(start = 15.dp, end = 15.dp),
+                colors = ButtonDefaults.buttonColors(Color("#242424".toColorInt())),
+                shape = CutCornerShape(7)
+            ) {
+                Text(
+                    text = "Log in",
+                    fontWeight = FontWeight(500),
+                    fontSize = 18.sp,
+                )
+            }
             Spacer(modifier = Modifier.height(15.dp))
             Button(
                 onClick = {

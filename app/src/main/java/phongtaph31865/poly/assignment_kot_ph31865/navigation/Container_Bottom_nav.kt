@@ -91,7 +91,8 @@ fun BottomNavbar() {
                 }
             }
         }
-    ) { paddingValues ->
+    ) {
+        paddingValues ->
         NavHost(
             navController = navController,
             startDestination = Screens_nav.Home.screen,
